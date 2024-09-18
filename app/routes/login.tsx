@@ -58,9 +58,24 @@ export const action: ActionFunction = async ({ request }) => {
   }
 }
 
-export default function Login() {
-  const actionData = useActionData()
+interface ActionData {
+  errors?: {
+      email?: string,
+      password?: string,
+      firstName?: string,
+      lastName?: string,
+  };
+  error?: string;
+  fields?: {
+      email?: string;
+      password?: string;
+      firstName?: string;
+      lastName?: string;
+  };
+}
 
+export default function Login() {
+  const actionData = useActionData<ActionData>()
   const firstLoad = useRef(true)
   const [action, setAction] = useState("login")
   const [errors, setErrors] = useState(actionData?.errors || {})
@@ -70,7 +85,7 @@ export default function Login() {
     email: actionData?.fields?.email || '',
     password: actionData?.fields?.password || '',
     firstName: actionData?.fields?.firstName || '',
-    lastName: actionData?.fields?.lastName || '',
+    lastName: actionData?.fields?.lastName || '',  
   })
 
   // Effekt, der beim Wechsel der Form-Aktion ausgeführt wird
