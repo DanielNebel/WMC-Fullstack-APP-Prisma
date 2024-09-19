@@ -115,6 +115,13 @@ export default function Login() {
     firstLoad.current = false
   }, [])
 
+  useEffect(() => {
+    if (actionData?.errors || actionData?.error) {
+      setErrors(actionData.errors || {});
+      setFormError(actionData.error || '');
+    }
+  }, [actionData]);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, field: string) => {
     setFormData((form) => ({ ...form, [field]: event.target.value }))
   }
