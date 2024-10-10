@@ -17,14 +17,29 @@ model User {
   email     String   @unique
   password  String
   firstName String
-  lastName  String   
+  lastName  String
+  department    String @default("ENGINEERING")
+  authoredKudos Kudo[]  @relation("AuthoredKudos")
+  kudos         Kudo[]  @relation("ReceivedKudos")
 }
 
-// model Post {
-//   id        Int     @id @default(autoincrement())
-//   title     String
-//   content   String?
-//   published Boolean @default(false)
-//   author    User    @relation(fields: [authorId], references: [id])
-//   authorId  Int
-// }
+
+model Kudo {
+  id          Int        @id @default(autoincrement())
+  message     String
+  createdAt   DateTime   @default(now())
+  author      User       @relation("AuthoredKudos", fields: [authorId], references: [id])
+  authorId    Int
+  recipient   User       @relation("ReceivedKudos", fields: [recipientId], references: [id])
+  recipientId Int
+  style       KudoStyle  @relation(fields: [styleId], references: [id])
+  styleId     Int @unique
+}
+
+model KudoStyle {
+  id              Int       @id @default(autoincrement())
+  backgroundColor String    @default("YELLOW")
+  textColor       String    @default("WHITE")
+  emoji           String    @default("THUMBSUP")
+  kudo            Kudo?
+}
