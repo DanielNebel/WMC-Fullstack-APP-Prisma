@@ -186,7 +186,7 @@ export default function KudoModal() {
         <br />
         <p className="text-blue-600 font-semibold mb-2">Preview</p>
         <div className="flex flex-col items-center md:flex-row gap-x-24 gap-y-2 md:gap-y-0">
-        <Kudo user={recipient} kudo={formData} />
+        <Kudo user={user} kudo={formData} />
           <div className="flex-1" />
           <button
             type="submit"
