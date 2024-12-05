@@ -11,35 +11,35 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String   @unique
-  password  String
-  firstName String
-  lastName  String
-  department    String @default("ENGINEERING")
-  authoredKudos Kudo[]  @relation("AuthoredKudos")
-  kudos         Kudo[]  @relation("ReceivedKudos")
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  email          String   @unique
+  password       String
+  firstName      String
+  lastName       String
+  department     String   @default("ENGINEERING")
+  profilePicture String? // Neues Feld für das Profilbild
+  authoredKudos  Kudo[]   @relation("AuthoredKudos")
+  kudos          Kudo[]   @relation("ReceivedKudos")
 }
 
-
 model Kudo {
-  id          Int        @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   message     String
-  createdAt   DateTime   @default(now())
-  author      User       @relation("AuthoredKudos", fields: [authorId], references: [id])
+  createdAt   DateTime  @default(now())
+  author      User      @relation("AuthoredKudos", fields: [authorId], references: [id])
   authorId    Int
-  recipient   User       @relation("ReceivedKudos", fields: [recipientId], references: [id])
+  recipient   User      @relation("ReceivedKudos", fields: [recipientId], references: [id])
   recipientId Int
-  style       KudoStyle  @relation(fields: [styleId], references: [id])
-  styleId     Int @unique
+  style       KudoStyle @relation(fields: [styleId], references: [id])
+  styleId     Int       @unique
 }
 
 model KudoStyle {
-  id              Int       @id @default(autoincrement())
-  backgroundColor String    @default("YELLOW")
-  textColor       String    @default("WHITE")
-  emoji           String    @default("THUMBSUP")
+  id              Int    @id @default(autoincrement())
+  backgroundColor String @default("YELLOW")
+  textColor       String @default("WHITE")
+  emoji           String @default("THUMBSUP")
   kudo            Kudo?
 }

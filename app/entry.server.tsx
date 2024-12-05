@@ -11,6 +11,11 @@ import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import { isbot } from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
+import express from "express";
+import path from 'path';
+
+// Serve static files
+// app.use(express.static(path.join(__dirname, 'public')));
 
 const ABORT_DELAY = 5_000;
 

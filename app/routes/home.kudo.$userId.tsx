@@ -17,7 +17,7 @@ import { validateColor, validateEmoji } from '~/utils/validators.server'
 export const loader: LoaderFunction = async ({ request, params }) => {
   const { userId } = params
 
-  if (typeof userId !== 'string') {
+  if (typeof userId !== 'string') { 
     return redirect('/home')
   }
   const recipient = await getUserById(parseInt(userId))
