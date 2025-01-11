@@ -29,13 +29,11 @@ export const action: ActionFunction = async ({ request }) => {
         return json({ error: "Invalid form data" }, { status: 400 });
     }
 
-    // Optional: Profilbild hochladen
     let profilePicturePath;
     if (profilePicture && profilePicture.size > 0) {
         profilePicturePath = await uploadProfilePicture(profilePicture);
     }
 
-    // Benutzer aktualisieren
     await updateUser(userId, {
         firstName,
         lastName,

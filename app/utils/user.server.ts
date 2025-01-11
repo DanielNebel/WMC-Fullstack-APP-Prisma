@@ -11,11 +11,11 @@ export async function uploadProfilePicture(file: File): Promise<string | undefin
     return undefined;
   }
 
-  const __dirname = path.resolve(); // Basisverzeichnis
-  const uploadDir = path.join(__dirname, 'public', 'pps'); // Upload-Pfad
+  const __dirname = path.resolve();
+  const uploadDir = path.join(__dirname, 'public', 'pps');
 
   if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true }); // Verzeichnis erstellen, falls nicht vorhanden
+    fs.mkdirSync(uploadDir, { recursive: true });
   }
 
   const fileExtension = path.extname(file.name) || '.jpg';
@@ -24,8 +24,8 @@ export async function uploadProfilePicture(file: File): Promise<string | undefin
 
   try {
     const buffer = Buffer.from(await file.arrayBuffer());
-    fs.writeFileSync(filePath, buffer); // Datei speichern
-    return `/pps/${fileName}`; // Pfad zur Datei zurückgeben
+    fs.writeFileSync(filePath, buffer);
+    return `/pps/${fileName}`;
   } catch (error) {
     console.error('Error saving file:', error);
     throw new Error('Failed to upload profile picture');
